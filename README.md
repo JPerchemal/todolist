@@ -7,7 +7,7 @@
 #### -Hooks
 #### -Form (boosted with Formik and Yup)
 #### -react-router-dom (for multiple pages)
-#### - API requests with Fetch (jsonPlaceholder, free fake API for testing)
+#### - API requests with Fetch then Axios (jsonPlaceholder, free fake API for testing).
 #### -Context API (useContext, useReducer...) then State Management with Redux.
 #### -PropTypes.
 #### -"Typical" architecture with a React project.
