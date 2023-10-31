@@ -10,3 +10,14 @@ const Button = ({ type = 'button', variant = 'primary', onClick, children }) => 
 };
 
 export default Button;
+
+
+
+/* Sans Props déstructurées :
+const Button = (props) => {
+    return (
+        <button type={props.type ? props.type : 'button'} onClick={props.onClick} className={`${style.btn} ${style[props.variant ? props.variant : 'primary']}`}>
+            {props.children}
+        </button>
+    );
+};*/

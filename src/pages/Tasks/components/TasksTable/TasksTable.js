@@ -6,7 +6,10 @@ import style from './TasksTable.module.css';
 
 const TasksTable = () => {
 
-//    const { tasksData } = useContext(TasksContext);
+//  Avec le context :    
+//  const { tasksData } = useContext(TasksContext);
+
+//  Avec redux :
     const tasksData = useSelector(state => state.tasks); 
 
     return (
@@ -26,7 +29,8 @@ const TasksTable = () => {
                     {
                         tasksData && tasksData.tasks && tasksData.tasks.map((task, index) => (
                             //<TaskRow key={ Date.parse(task.createdAt) - index } task={ task } index={ index }/>
-                            //On a remplacé new Date() par Date.now() dans TasksSlice donc on n'a plus besoin du Date.parse()
+                            /*On a remplacé new Date() par Date.now() (qui retourne un nbre) dans TasksSlice
+                            donc on n'a plus besoin du Date.parse() qui transfomait la date en nbre*/
                             <TaskRow key={ task.createdAt - index } task={ task } index={ index }/>
                         ))
                     }

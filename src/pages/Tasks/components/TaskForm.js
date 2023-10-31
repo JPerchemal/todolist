@@ -7,18 +7,18 @@ import PropTypes from 'prop-types';
 import { addTask, editTask } from "../../../store/TasksSlice";
 import { useDispatch } from "react-redux";
 
-const TaskForm = ({ closeModal, value, index }) => {
+const TaskForm = ({ closeModal, value, index }) => {    // value et index c'est pour la modification(Edit)
 
-    const [ formValue, setFormValue ] = useState(value ? value : {
+    const [ formValue, setFormValue ] = useState(value ? value : {  // On récupére les value ou les value par défaut
         title: '',
         description: '',
     });
 
-    const [ invalidFields, setInvalidFields ] = useState([]);
+    const [ invalidFields, setInvalidFields ] = useState([]); // récupère les erreurs dans un tableau
 
     // const { addTask, editTask } = useContext(TasksContext);
 
-    const dispatch = useDispatch();     // gestion des tâches avec Redux
+    const dispatch = useDispatch();  // Pour dispatcher les actions il faut utiliser useDispatch (gestion des tâches avec Redux)
 
     const handleSubmit = (event) => {
         // Empêcher la soumission / La création d'une tâche s'il y a des erreurs
@@ -28,7 +28,8 @@ const TaskForm = ({ closeModal, value, index }) => {
             return;
         }
 
-        /*if (value && !isNaN(+index)) { // S'il y a une value en props => Modification
+        /* Gestion avec le contexte :
+        if (value && !isNaN(+index)) { // S'il y a une value en props => Modification
             editTask({ task: formValue, taskIndex: index });
         } else { // Sinon => Création
             addTask({                       // gestion avec contexte des tâches
@@ -36,18 +37,20 @@ const TaskForm = ({ closeModal, value, index }) => {
                 createdAt: new Date (),
                 isDone: false,
             });
-        }*/
+        }
+        */
 
+        // Gestion avec Redux :
         if (value && !isNaN(+index)) { // S'il y a une value en props => Modification
             dispatch(editTask({ task: formValue, taskIndex: index }));
         } else { // Sinon => Création
-            dispatch(addTask(formValue));   // gestion des tâches avec Redux
+            dispatch(addTask(formValue));   // addTask est une action d'un reducer donc il faut le dispatcher (gestion des tâches avec Redux)
         }
-        // closeModal vient du composant Task ligne 24. Ne pas oublier de le mettre en tant que props dans la variable TaskForm)
+        // closeModal vient du composant Task ligne 26. Ne pas oublier de le mettre en tant que props dans la variable TaskForm)
         closeModal();
     };
 
-    const handleError = (error) => {
+    const handleError = (error) => {            // On récupère {name, error}
 
         const invalidFieldsCopy = [...invalidFields];
         // On récupère l'index d'un éventuel champs invalide enregistré dans le tableau
@@ -63,7 +66,7 @@ const TaskForm = ({ closeModal, value, index }) => {
         } else { // Si aucune erreur n'est renvoyée
 
             if (invalidFieldsIndex !== -1) { // Mais que le champs est enregistré comme invalide, on le supprime du tableau
-                invalidFieldsCopy.splice(invalidFieldsIndex, 1);
+                invalidFieldsCopy.splice(invalidFieldsIndex, 1); //splice pour supprimer l'élément (l'erreur / le champs) qui n'existe plus
                 setInvalidFields(invalidFieldsCopy);
             };
             // Si le champs n'est pas enregistré, on ne fait rien.
@@ -85,7 +88,7 @@ const TaskForm = ({ closeModal, value, index }) => {
                     minLength: 2,
                     maxLength: 25
                 } }
-                onError={ handleError }
+                onError={ handleError }  // props onError qui déclenche une fct handleError (ligne 50)
             />
             <TextareaField
                 name='description'

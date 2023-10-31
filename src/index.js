@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <Provider store={ store }>
+    <Provider store={ store }>      {/* une props store avec la valeur store*/}
       <BrowserRouter>
         <App />
       </BrowserRouter>
@@ -22,3 +22,16 @@ root.render(
 
 reportWebVitals();
 
+/*
+Avant d'utiliser Redux (avec un Provider):
+
+root.render(
+  <React.StrictMode>
+    <TasksContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </TasksContextProvider>
+  </React.StrictMode>
+);
+*/

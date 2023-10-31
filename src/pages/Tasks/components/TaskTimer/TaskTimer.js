@@ -12,8 +12,8 @@ const TaskTimer = ({ index, onCloseModal }) => {
     const { time, startTimer, stopTimer } = useTimer();
     const { parseSecondsToHMS } = useTimeParser();
 
-    //const { editTask } = useContext(TasksContext);
-    const dispatch = useDispatch();
+    //const { editTask } = useContext(TasksContext);    --> gestion des tasks avec le context
+    const dispatch = useDispatch();                 //  --> gestion des tasks avec Redux
 
     useEffect(() => {
         startTimer();

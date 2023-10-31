@@ -13,19 +13,26 @@ const TaskRow = ({ task, index }) => {
     const [ IsEditTaskModalOpen, setIsEditTaskModalOpen ] = useState(false);
     const [ IsTimerModalOpen, setIsTimerModalOpen ] = useState(false);
 
-    // const { removeTask, toggleTaskIsDone } = useContext(TasksContext);
+    /* Gestion des tâches avec le context :
+    const { removeTask, toggleTaskIsDone } = useContext(TasksContext);*/
+
     const dispatch = useDispatch();     // gestion des tâches avec Redux
 
     // Pour avoir le temps dans le bon format (voir le hook useTimeParser)
     const { parseSecondsToHMS } = useTimeParser();
 
+/* Gestion des tâches avec le context :
     const handleDeleteTask = () => {
-        dispatch(removeTask(index));
+        removeTask(index);
+    };
+*/
+    const handleDeleteTask = () => {
+        dispatch(removeTask(index));    // gestion des tâches avec Redux
     };
 
-    const handleChangeStatus = (event) => {
-        const value = event.target.checked;
-        dispatch(toggleTaskIsDone({ taskIndex: index, isDone: value }));
+    const handleChangeStatus = (event) => {             // Fct pour récupérer le chgt (l'événement) qd l'utilisateur coche/décoche la case
+        const value = event.target.checked;             // On récupére la valeur de checked
+        dispatch(toggleTaskIsDone({ taskIndex: index, isDone: value }));  // on récupère toogleTaskIsDone qui vient du context
     };
 
     //On a remplacé new Date() par Date.now() dans TasksSlice

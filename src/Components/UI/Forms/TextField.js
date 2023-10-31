@@ -14,13 +14,13 @@ const TextField = ({ label, name, placeholder, validation, value, onChange, onEr
         onChange(value);
     };
 
-    useEffect(() => {
+    useEffect(() => {                       // gère la validation du champ en fonction des màj de value
         validateField(value, validation);
     }, [ value ]);
 
-    useEffect(() => {
-        onError({ name, error });
-    }, [ error, name ]);
+    useEffect(() => {                       // se déclenche au chargement du composant
+        onError({ name, error });           // Execute onError (au chargement l'error est à null donc pas grave)
+    }, [ error, name ]);                    // name (récupère le nom du champs où il y a l'error et l'error)
 
     return (
 
